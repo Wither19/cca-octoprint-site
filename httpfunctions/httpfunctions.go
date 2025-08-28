@@ -11,8 +11,12 @@ import (
 
 var printers []string = []string{"a", "b", "c", "d", "e", "f"}
 
-func ParseTemplate(htmlName string) *template.Template {
+func ParseTemplate(htmlName string, f template.FuncMap) *template.Template {
 	t := template.Must(template.ParseFiles(fmt.Sprintf("./static/pages/%v", htmlName)))
+
+	if f != nil {
+		t = t.Funcs(f)
+	}
 
 	return t
 }
@@ -32,6 +36,6 @@ func PrinterStatePage(w http.ResponseWriter, r *http.Request) {
 		printerState := apifunctions.GetPrinterState("[ADD API KEY HERE]")
 		printerData := apifunctions.ConvertTemperatureData(printerState, printerName)
 
-		ParseTemplate("printer-overview.html").Execute(w, printerData)
+		ParseTemplate("printer-overview.html", ).Execute(w, printerData)
 	}
 }

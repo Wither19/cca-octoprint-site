@@ -69,3 +69,19 @@ func ConvertTemperatureData(data octoprint.PrinterResponse, printerName string) 
 
 	return m
 }
+
+type PrinterStateFlags struct {
+	Operational   bool `json:"operational"`
+	Paused        bool `json:"paused"`
+	Printing      bool `json:"printing"`
+	Cancelling    bool `json:"cancelling"`
+	Pausing       bool `json:"pausing"`
+	SDReady       bool `json:"sdReady"`
+	Error         bool `json:"error"`
+	Ready         bool `json:"ready"`
+	ClosedOrError bool `json:"closedOrError"`
+}
+
+func PrinterStateColors(stateFlags PrinterStateFlags) {
+	
+}
