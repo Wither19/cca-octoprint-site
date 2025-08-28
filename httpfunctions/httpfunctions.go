@@ -37,14 +37,14 @@ func PrinterStatePage(w http.ResponseWriter, r *http.Request) {
 		printerData := apifunctions.ConvertTemperatureData(printerState, printerName)
 
 		printerStateFuncMap := map[string]any{
-			"printerStateColors": func(stateFlags apifunctions.PrinterStateFlags) string {
+			"printerStateColors": func(s apifunctions.PrinterStateFlags) string {
 				var color string
-				
-				if stateFlags.Ready && stateFlags.SDReady {
+
+				if s.Ready && s.SDReady {
 					color = "success"
-				} else if stateFlags.Paused || stateFlags.Printing || stateFlags.Cancelling || stateFlags.Pausing {
+				} else if s.Paused || s.Printing || s.Cancelling || s.Pausing {
 					color = "warning"
-				} else if stateFlags.Error || stateFlags.ClosedOrError {
+				} else if s.Error || s.ClosedOrError {
 					color = "danger"
 				} else {
 					color = "secondary"
