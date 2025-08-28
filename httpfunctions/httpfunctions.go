@@ -12,11 +12,16 @@ import (
 var printers []string = []string{"a", "b", "c", "d", "e", "f"}
 
 func ParseTemplate(htmlName string, f template.FuncMap) *template.Template {
-	t := template.Must(template.ParseFiles(fmt.Sprintf("./static/pages/%v", htmlName)))
+	templateName := strings.ReplaceAll(htmlName, "./static/pages/", "")
+	templateName = strings.ReplaceAll(templateName, ".html", "")
+
+	t := template.New(templateName)
 
 	if f != nil {
 		t = t.Funcs(f)
 	}
+
+	t = template.Must(template.ParseFiles(fmt.Sprintf("./static/pages/%v", htmlName)))
 
 	return t
 }
@@ -36,24 +41,6 @@ func PrinterStatePage(w http.ResponseWriter, r *http.Request) {
 		printerState := apifunctions.GetPrinterState("[ADD API KEY HERE]")
 		printerData := apifunctions.ConvertTemperatureData(printerState, printerName)
 
-		printerStateFuncMap := map[string]any{
-			"printerStateColors": func(s apifunctions.PrinterStateFlags) string {
-				var color string
-
-				if s.Ready && s.SDReady {
-					color = "success"
-				} else if s.Paused || s.Printing || s.Cancelling || s.Pausing {
-					color = "warning"
-				} else if s.Error || s.ClosedOrError {
-					color = "danger"
-				} else {
-					color = "secondary"
-				}
-
-				return color
-			},
-		}
-
-		ParseTemplate("printer-overview.html", printerStateFuncMap).Execute(w, printerData)
+		ParseTemplate("printer-overview.html", map[string]any{"printerStateColors": apifunctions.PrinterStateColors}).Execute(w, printerData)
 	}
 }
