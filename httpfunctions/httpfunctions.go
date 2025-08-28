@@ -38,9 +38,9 @@ func PrinterStatePage(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusMovedPermanently)
 	} else {
 
-		printerState := apifunctions.GetPrinterState("[ADD API KEY HERE]")
+		printerState := apifunctions.GetPrinterState("<API KEY>", "<BASE URL>")
 		printerData := apifunctions.ConvertTemperatureData(printerState, printerName)
 
-		ParseTemplate("printer-overview.html", map[string]any{"printerStateColors": apifunctions.PrinterStateColors}).Execute(w, printerData)
+		ParseTemplate("printer-overview.html", template.FuncMap{"printerStateColors": apifunctions.PrinterStateColors}).Execute(w, printerData)
 	}
 }

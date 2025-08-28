@@ -9,7 +9,7 @@ import (
 	"github.com/wmarchesi123/go-3dprint-client/octoprint"
 )
 
-func GetPrinterState(apiKey string) octoprint.PrinterResponse {
+func GetPrinterState(apiKey string, baseUrl string) octoprint.PrinterResponse {
 	var p octoprint.PrinterResponse
 
 	printerStateFile, err := os.ReadFile("printer.json")
@@ -82,8 +82,10 @@ type PrinterStateFlags struct {
 	ClosedOrError bool `json:"closedOrError"`
 }
 
-func PrinterStateColors(s PrinterStateFlags) string {
+func PrinterStateColors() string {
 	var color string
+
+	s := GetPrinterState("<API KEY>", "<BASE URL>").State.Flags
 
 	if s.Ready && s.SDReady {
 		color = "success"
