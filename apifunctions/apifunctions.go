@@ -81,7 +81,3 @@ type PrinterStateFlags struct {
 	Ready         bool `json:"ready"`
 	ClosedOrError bool `json:"closedOrError"`
 }
-
-func PrinterStateColors(stateFlags PrinterStateFlags) {
-	
-}
