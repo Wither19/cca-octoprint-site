@@ -41,6 +41,6 @@ func PrinterStatePage(w http.ResponseWriter, r *http.Request) {
 		printerState := apifunctions.GetPrinterState("<API KEY>", "<BASE URL>")
 		printerData := apifunctions.ConvertTemperatureData(printerState, printerName)
 
-		ParseTemplate("printer-overview.html", template.FuncMap{"printerStateColors": apifunctions.PrinterStateColors}).Execute(w, printerData)
+		ParseTemplate("printer-overview.html", nil).Execute(w, printerData)
 	}
 }
