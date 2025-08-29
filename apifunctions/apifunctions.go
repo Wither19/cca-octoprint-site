@@ -36,6 +36,7 @@ type ModifiedTemperatureData struct {
 type ModifiedPrinterResponse struct {
 	PrinterName        string
 	State              octoprint.PrinterState
+	StateColor         string
 	Temperature        []ModifiedTemperatureData
 	TemperatureHistory []octoprint.TemperatureHistory
 }
@@ -56,6 +57,7 @@ func ConvertTemperatureData(data octoprint.PrinterResponse, printerName string) 
 
 	m.PrinterName = fmt.Sprintf("Printer %v", printerName)
 	m.State = data.State
+	m.StateColor = PrinterStateColors(data.State.Flags)
 	m.TemperatureHistory = data.Temperature.History
 
 	m.Temperature = make([]ModifiedTemperatureData, 6)
@@ -82,10 +84,8 @@ type PrinterStateFlags struct {
 	ClosedOrError bool `json:"closedOrError"`
 }
 
-func PrinterStateColors() string {
+func PrinterStateColors(s PrinterStateFlags) string {
 	var color string
-
-	s := GetPrinterState("<API KEY>", "<BASE URL>").State.Flags
 
 	if s.Ready && s.SDReady {
 		color = "success"
