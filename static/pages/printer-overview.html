@@ -33,6 +33,17 @@
     integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
     crossorigin="anonymous"></script>
   <script>
+    async function callHandler(handlerUrl) {
+        let x = await fetch(handlerUrl);
+
+        return await x.text();
+    }
+
+    document.querySelector("#handler-call-test").addEventListener("click", () => {
+        let responseText = callHandler("/api/thing");
+        alert(responseText);
+    });
+
     function massReplace(selector, replaceSubject = "-", replaceString = " ") {
       let elems = document.querySelectorAll(selector);
 
