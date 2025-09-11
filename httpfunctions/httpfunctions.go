@@ -44,3 +44,10 @@ func PrinterStatePage(w http.ResponseWriter, r *http.Request) {
 		ParseTemplate("printer-overview.html", nil).Execute(w, printerData)
 	}
 }
+
+func APITest(w http.ResponseWriter, r *http.Request) {
+
+	APIMsg := "Hello world!"
+	w.Write([]byte(APIMsg))
+
+}
