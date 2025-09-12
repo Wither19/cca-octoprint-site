@@ -1,8 +1,8 @@
 package httpfunctions
 
 import (
+	"embed"
 	"encoding/json"
-	"fmt"
 	"jv/cca-octoprint/apifunctions"
 	"net/http"
 	"slices"
@@ -12,9 +12,11 @@ import (
 
 var printers []string = []string{"a", "b", "c", "d", "e", "f"}
 
+//go:embed frontend/dist/* frontend/dist/assets/*
+var staticWebFiles embed.FS
+
 func ParseTemplate(htmlName string, f template.FuncMap) *template.Template {
-	templateName := strings.ReplaceAll(htmlName, "./static/pages/", "")
-	templateName = strings.ReplaceAll(templateName, ".html", "")
+	templateName := strings.ReplaceAll(htmlName, ".html", "")
 
 	t := template.New(templateName)
 
@@ -22,13 +24,13 @@ func ParseTemplate(htmlName string, f template.FuncMap) *template.Template {
 		t = t.Funcs(f)
 	}
 
-	t = template.Must(template.ParseFiles(fmt.Sprintf("./static/pages/%v", htmlName)))
+	t = template.Must(template.ParseFS(main.staticWebFiles, htmlName))
 
 	return t
 }
 
 func MainPage(w http.ResponseWriter, r *http.Request) {
-	ParseTemplate("index.html", nil).Execute(w, printers)
+	ParseTemplate("/static/index.html", nil).Execute(w, nil)
 }
 
 func PrinterStatePage(w http.ResponseWriter, r *http.Request) {
@@ -38,11 +40,7 @@ func PrinterStatePage(w http.ResponseWriter, r *http.Request) {
 
 		http.Redirect(w, r, "/", http.StatusMovedPermanently)
 	} else {
-
-		printerState := apifunctions.GetPrinterState("<API KEY>", "<BASE URL>")
-		printerData := apifunctions.ConvertTemperatureData(printerState, printerName)
-
-		ParseTemplate("printer-overview.html", nil).Execute(w, printerData)
+		ParseTemplate("static/printer-overview.html", nil).Execute(w, nil)
 	}
 }
 

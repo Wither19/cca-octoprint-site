@@ -1,8 +1,12 @@
-.PHONY: build preview
+.PHONY: build preview dev
 
 build:
 	@echo "Building Go source"
 	go build
+	cd frontend && bun run build
 
 preview: build
-	./jv-pokeapi
+	./cca-octoprint
+
+dev:
+	./cca-octoprint
