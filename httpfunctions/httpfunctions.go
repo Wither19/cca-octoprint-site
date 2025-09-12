@@ -1,6 +1,7 @@
 package httpfunctions
 
 import (
+	"encoding/json"
 	"fmt"
 	"jv/cca-octoprint/apifunctions"
 	"net/http"
@@ -47,7 +48,10 @@ func PrinterStatePage(w http.ResponseWriter, r *http.Request) {
 
 func APITest(w http.ResponseWriter, r *http.Request) {
 
-	APIMsg := "Hello world!"
-	w.Write([]byte(APIMsg))
+	printerResponse := apifunctions.ConvertTemperatureData(apifunctions.GetPrinterState("", ""), "")
+
+	APIMsg, _ := json.Marshal(printerResponse)
+
+	w.Write(APIMsg)
 
 }

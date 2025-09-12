@@ -33,14 +33,20 @@
     integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
     crossorigin="anonymous"></script>
   <script>
-    async function callHandler(handlerUrl) {
-        let x = await fetch(handlerUrl);
+    async function callHandler(handlerURL) {
+        let x = await fetch(handlerURL);
 
         return await x.text();
     }
 
+    async function callHandlerJSON(handlerURL) {
+      let x = await fetch(handlerURL);
+
+      return await x.json();
+    }
+
     document.querySelector("#handler-call-test").addEventListener("click", () => {
-        let responseText = callHandler("/api/thing");
+        let responseText = callHandlerJSON("/api/thing");
         alert(responseText);
     });
 
