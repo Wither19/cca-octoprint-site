@@ -21,7 +21,7 @@ function App() {
       <div className="display-6 text-center mx-2">CCA 3D Printing</div>
       <div className="mx-3 my-5 d-flex flex-wrap justify-content-around">
         {printerList.map((printer) => (
-          <a className="text-capitalize fs-3 cursor-pointer" onClick={() => setPrinter(printer)}>Printer {printer}</a>
+          <a style={{ cursor: "pointer" }} className="text-capitalize fs-3 text-decoration-none" onClick={() => setPrinter(printer)}>Printer {printer}</a>
         ))}
       </div>
 
