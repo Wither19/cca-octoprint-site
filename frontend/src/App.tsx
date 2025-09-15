@@ -8,13 +8,13 @@ function App() {
   const printerList = ["a", "b", "c", "d", "e", "f"]
 
   const [currentPrinter, setPrinter] = useState("a")
+  const [printerData, setPrinterData] = useState<ModifiedPrinterResponse | null>()
 
-  const [printerData, setPrinterData] = useState<ModifiedPrinterResponse | null>();
-
-
-  useEffect(() => {
+  function getPrinterResponse() {
     axios.post("/api/thing").then((r) => setPrinterData(r.data))
-  }, [currentPrinter])
+  }
+
+  useEffect(getPrinterResponse, [currentPrinter])
 
   return (
     <>
