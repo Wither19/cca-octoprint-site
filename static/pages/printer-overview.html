@@ -39,11 +39,6 @@
         return await x.text();
     }
 
-    async function callHandlerJSON(handlerURL) {
-      let x = await fetch(handlerURL);
-
-      return await x.json();
-    }
 
     document.querySelector("#handler-call-test").addEventListener("click", () => {
         let responseText = callHandlerJSON("/api/thing");
