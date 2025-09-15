@@ -42,7 +42,7 @@ function App() {
           </div>
         </>
       ) : (
-        <div className="display-3 text-center">Could not reach Printer API</div>
+        <div className="display-6 text-center">Could not reach Printer API</div>
       )}
     </>
   )
