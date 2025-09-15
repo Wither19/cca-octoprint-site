@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"io/fs"
 	"jv/cca-octoprint/apifunctions"
@@ -27,12 +28,12 @@ func main() {
 
 	http.Handle("/dist/", http.StripPrefix("/dist/", http.FileServer(http.FS(webAppPages))))
 
-	webAppAssets, err := fs.Sub(staticWebAssets, "assets")
+	webAppAssets, err := fs.Sub(staticWebAssets, "frontend/dist/assets")
 	if err != nil {
 		log.Fatalln("Could not embed static files:", err)
 	}
 
-	http.Handle("/assets", http.StripPrefix("/assets", http.FileServer(http.FS(webAppAssets))))
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.FS(webAppAssets))))
 
 	http.HandleFunc("/", mainPage)
 	// http.HandleFunc("/printer/{printerNumber}/", printerStatePage)
@@ -50,15 +51,15 @@ func parseTemp(htmlName string, f template.FuncMap) *template.Template {
 		t = t.Funcs(f)
 	}
 
-	t = template.Must(template.ParseFS(staticWebPages, htmlName))
+	t = template.Must(template.ParseFS(staticWebPages, fmt.Sprintf("frontend/dist/%v", htmlName)))
 
 	return t
 }
 
-var printers []string = []string{"a", "b", "c", "d", "e", "f"}
+// var printers []string = []string{"a", "b", "c", "d", "e", "f"}
 
 func mainPage(w http.ResponseWriter, r *http.Request) {
-	parseTemp("/dist/index.html", nil).Execute(w, nil)
+	parseTemp("index.html", nil).Execute(w, nil)
 }
 
 // func printerStatePage(w http.ResponseWriter, r *http.Request) {
