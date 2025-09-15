@@ -1,12 +1,13 @@
-.PHONY: build preview dev
+.PHONY: go vite build preview
 
-build:
-	@echo "Building Go source"
+go: 
 	go build
+
+vite:
 	cd frontend && bun run build
 
-preview: build
+build: go vite
 	./cca-octoprint
 
-dev:
+preview:
 	./cca-octoprint
