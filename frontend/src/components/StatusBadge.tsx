@@ -1,4 +1,4 @@
-type StatusBadgeProps = { status: string, color: string };
+type StatusBadgeProps = { status: string, color: string }
 
 function StatusBadge({ status, color }: StatusBadgeProps) {
   return (
@@ -6,4 +6,4 @@ function StatusBadge({ status, color }: StatusBadgeProps) {
   )
 }
 
-export default StatusBadge;
+export default StatusBadge

@@ -1,4 +1,4 @@
-type PrinterLinkProps = { printerID: string, click: () => void };
+type PrinterLinkProps = { printerID: string, click: () => void }
 
 function PrinterLink({ printerID, click }: PrinterLinkProps) {
   return  (
@@ -8,4 +8,4 @@ function PrinterLink({ printerID, click }: PrinterLinkProps) {
     )
 }
 
-export default PrinterLink;
+export default PrinterLink

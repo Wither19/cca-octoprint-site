@@ -1,4 +1,4 @@
-import type { ModifiedTemperatureData } from "../types";
+import type { ModifiedTemperatureData } from "../types"
 
 function TemperatureListItem({ temperature }: { temperature: ModifiedTemperatureData }) {
   return (
@@ -13,4 +13,4 @@ function TemperatureListItem({ temperature }: { temperature: ModifiedTemperature
   )
 }
 
-export default TemperatureListItem;
+export default TemperatureListItem
