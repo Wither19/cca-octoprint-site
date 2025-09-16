@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	"encoding/json"
 	"fmt"
 	"html/template"
 	"io/fs"
@@ -75,10 +74,8 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 
 func APITest(w http.ResponseWriter, r *http.Request) {
 
-	printerResponse := apifunctions.ConvertTemperatureData(apifunctions.GetPrinterState("", ""), "")
+	printerResponse := apifunctions.GetPrinterState("", "printer.json")
 
-	APIMsg, _ := json.Marshal(printerResponse)
-
-	w.Write(APIMsg)
+	w.Write(printerResponse)
 
 }

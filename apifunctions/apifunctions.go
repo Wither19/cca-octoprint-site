@@ -9,21 +9,35 @@ import (
 	"github.com/wmarchesi123/go-3dprint-client/octoprint"
 )
 
-func GetPrinterState(apiKey string, baseUrl string) octoprint.PrinterResponse {
-	var p octoprint.PrinterResponse
-
-	printerStateFile, err := os.ReadFile("printer.json")
+func GetPrinterState(APIKey string, baseURL string) []byte {
+	printerStateFile, err := os.ReadFile(baseURL)
 	if err != nil {
 		log.Fatalln("Failed to open printer state file:", err)
 	}
 
-	if err := json.Unmarshal(printerStateFile, &p); err != nil {
-		log.Fatalln("Failed to get printer state:", err)
+	marshaledPrinterState, err := json.Marshal(&printerStateFile)
+	if err != nil {
+		log.Fatalln("Failed to marshal printer state file:", err)
 	}
 
-	return p
-
+	return marshaledPrinterState
 }
+
+// func GetPrinterState(apiKey string, baseUrl string) octoprint.PrinterResponse {
+// 	var p octoprint.PrinterResponse
+
+// 	printerStateFile, err := os.ReadFile("printer.json")
+// 	if err != nil {
+// 		log.Fatalln("Failed to open printer state file:", err)
+// 	}
+
+// 	if err := json.Unmarshal(printerStateFile, &p); err != nil {
+// 		log.Fatalln("Failed to get printer state:", err)
+// 	}
+
+// 	return p
+
+// }
 
 // A representation of a printer temprerature data entry converted for use in a slice / array. the Name field will contain what was the key for the original temperature struct.
 type ModifiedTemperatureData struct {

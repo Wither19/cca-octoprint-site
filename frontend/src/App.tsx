@@ -20,6 +20,7 @@ function App() {
     axios.post("/api/thing").then((r) => setPrinterData(r.data))
   }
 
+
   useEffect(getPrinterResponse, [currentPrinter])
 
   return (
@@ -35,7 +36,7 @@ function App() {
         <>
           <div className="display-6 text-center text-capitalize">
             Printer {currentPrinter}
-           <StatusBadge status={printerData.State.Text} color={printerData.StateColor} />
+           <StatusBadge state={printerData.State} />
           </div>
           <div id="temperature-container" className="mx-4">
             {printerData && printerData.Temperature.map((temp: ModifiedTemperatureData) => (

@@ -1,8 +1,13 @@
-type StatusBadgeProps = { status: string, color: string }
+import type { PrinterState } from "../types"
 
-function StatusBadge({ status, color }: StatusBadgeProps) {
+import { printerStateColors } from "../functions"
+
+
+type StatusBadgeProps = { state: PrinterState }
+
+function StatusBadge({ state }: StatusBadgeProps) {
   return (
-     <span className={`badge bg-${color} fs-6 position-relative`}>{status}</span>
+     <span className={`badge bg-${printerStateColors(state.Flags)} fs-6 position-relative`}>{state.Text}</span>
   )
 }
 
