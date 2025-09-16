@@ -14,7 +14,7 @@ function App() {
   const printerList = ["a", "b", "c", "d", "e", "f"]
 
   const [currentPrinter, setPrinter] = useState("a")
-  const [printerData, setPrinterData] = useState<ModifiedPrinterResponse | null>()
+  const [printerData, setPrinterData] = useState<ModifiedPrinterResponse>()
 
   function getPrinterResponse() {
     axios.post("/api/thing").then((r) => setPrinterData(r.data))
@@ -33,10 +33,10 @@ function App() {
 
       {printerData ? (
         <>
-          <h2 className="display-6 text-center text-capitalize">
+          <div className="display-6 text-center text-capitalize">
             Printer {currentPrinter}
            <StatusBadge status={printerData.State.Text} color={printerData.StateColor} />
-          </h2>
+          </div>
           <div id="temperature-container" className="mx-4">
             {printerData && printerData.Temperature.map((temp: ModifiedTemperatureData) => (
               <TemperatureListItem temperature={temp} key={`temp-${temp.Name}`} />
