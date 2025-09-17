@@ -11,7 +11,7 @@ export type TemperatureObject = {
   Tool2: TemperatureData;
   Tool3: TemperatureData;
   Tool4: TemperatureData;
-  History: TemperatureHistory[];
+  History?: TemperatureHistory[];
 };
 
 export type ModifiedTemperatureData = {

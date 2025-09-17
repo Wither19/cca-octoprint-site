@@ -16,20 +16,23 @@ function App() {
   const [currentPrinter, setPrinter] = useState("a")
   const [printerState, setPrinterState] = useState<PrinterState>()
 
-  var tempatureList: ModifiedTemperatureData | null;
+  const [temp, setTemp] = useState<Omit<TemperatureObject, "History"> | null>(null);
 
   function getPrinterResponse() {
     axios.post("/api/thing").then((r) => setPrinterState(r.data))
   }
 
+  function convertTemp() {
+    const newTemp: TemperatureObject = printerState!.Temperature;
+    delete newTemp.History;
+
+    setTemp(newTemp);
+
+  }
 
   useEffect(getPrinterResponse, [currentPrinter])
 
-  useEffect(() => {
-
-
-    let tempList: Omit<TemperatureObject, "History"> = printerState!.Temperature.filter((t) => !Array.isArray(t));
-  }, [printerState])
+  useEffect(convertTemp, [printerState])
 
   return (
     <>
@@ -47,7 +50,11 @@ function App() {
             <StatusBadge state={printerState} />
           </div>
           <div id="temperature-container" className="mx-4">
-
+            {temp ? (
+              Object.keys(temp).map((key) => (
+                
+              ))
+            ) : ()}
           </div>
         </>
       ) : (
