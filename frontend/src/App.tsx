@@ -3,7 +3,7 @@ import "./App.scss"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-import type { ModifiedTemperatureData, PrinterState } from "./types"
+import type { ModifiedTemperatureData, PrinterState, TemperatureData, TemperatureHistory } from "./types"
 
 import PrinterLink from "./components/PrinterLink"
 import StatusBadge from "./components/StatusBadge"
@@ -14,14 +14,23 @@ function App() {
   const printerList = ["a", "b", "c", "d", "e", "f"]
 
   const [currentPrinter, setPrinter] = useState("a")
-  const [printerData, setPrinterData] = useState<PrinterState>()
+  const [printerState, setPrinterState] = useState<PrinterState>()
+
+  var tempatureList: ModifiedTemperatureData | null;
 
   function getPrinterResponse() {
-    axios.post("/api/thing").then((r) => setPrinterData(r.data))
+    axios.post("/api/thing").then((r) => setPrinterState(r.data))
   }
 
 
   useEffect(getPrinterResponse, [currentPrinter])
+
+  useEffect(() => {
+    let tempKeys = Object.keys(printerState!.Temperature)
+    let tempValues = Object.values(printerState!.Temperature)
+
+    let tempList: Omit<TemperatureData | TemperatureHistory[], TemperatureHistory[]> = tempValues.filter((t) => !Array.isArray(t));
+  }, [printerState])
 
   return (
     <>
@@ -32,16 +41,14 @@ function App() {
         ))}
       </div>
 
-      {printerData ? (
+      {printerState ? (
         <>
           <div className="display-6 text-center text-capitalize">
             Printer {currentPrinter}
-            <StatusBadge state={printerData} />
+            <StatusBadge state={printerState} />
           </div>
           <div id="temperature-container" className="mx-4">
-            {printerData && printerData.Temperature.map((temp: ModifiedTemperatureData) => (
-              <TemperatureListItem temperature={temp} key={`temp-${temp.Name}`} />
-            ))}
+
           </div>
         </>
       ) : (
