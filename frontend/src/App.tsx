@@ -3,7 +3,7 @@ import "./App.scss"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-import type { ModifiedTemperatureData, PrinterState, TemperatureData, TemperatureHistory, NoHistoryTemperature, TemperatureObject } from "./types"
+import type { PrinterState, TemperatureObject } from "./types"
 
 import PrinterLink from "./components/PrinterLink"
 import StatusBadge from "./components/StatusBadge"
@@ -43,18 +43,16 @@ function App() {
         ))}
       </div>
 
-      {printerState ? (
+      {printerState && temp ? (
         <>
           <div className="display-6 text-center text-capitalize">
             Printer {currentPrinter}
             <StatusBadge state={printerState} />
           </div>
           <div id="temperature-container" className="mx-4">
-            {temp ? (
-              Object.keys(temp).map((key) => (
-                
-              ))
-            ) : ()}
+            {Object.keys(temp).map((k) => (
+              <TemperatureListItem key={k} temperature={temp[k as keyof typeof temp]} name={k} />
+            ))}
           </div>
         </>
       ) : (
