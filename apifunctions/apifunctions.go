@@ -1,7 +1,6 @@
 package apifunctions
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -15,12 +14,13 @@ func GetPrinterState(APIKey string, baseURL string) []byte {
 		log.Fatalln("Failed to open printer state file:", err)
 	}
 
-	marshaledPrinterState, err := json.Marshal(&printerStateFile)
-	if err != nil {
-		log.Fatalln("Failed to marshal printer state file:", err)
-	}
+	// marshaledPrinterState, err := json.Marshal(&printerStateFile)
+	// if err != nil {
+	// 	log.Fatalln("Failed to marshal printer state file:", err)
+	// }
 
-	return marshaledPrinterState
+	return printerStateFile
+	// return marshaledPrinterState
 }
 
 // func GetPrinterState(apiKey string, baseUrl string) octoprint.PrinterResponse {

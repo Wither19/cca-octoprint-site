@@ -8,6 +8,7 @@ import type { PrinterState } from "./types"
 import PrinterLink from "./components/PrinterLink"
 import StatusBadge from "./components/StatusBadge"
 import TemperatureListItem from "./components/TemperatureListItem"
+import APIErrorMSG from "./components/APIErrorMSG"
 
 function App() {
 
@@ -32,11 +33,14 @@ function App() {
       </div>
 
       {printerState ? (
-        <>
           <div className="display-6 text-center text-capitalize">
             Printer {currentPrinter}
             <StatusBadge state={printerState} />
           </div>
+          ) : (
+            <APIErrorMSG />
+          )}
+          {printerState?.Temperature ? (
           <div id="temperature-container" className="mx-4">
             <TemperatureListItem name="Bed" temperature={printerState!.Temperature.Bed} />
             <TemperatureListItem name="Tool-0" temperature={printerState!.Temperature.Tool0} />
@@ -45,7 +49,6 @@ function App() {
             <TemperatureListItem name="Tool-3" temperature={printerState!.Temperature.Tool3} />
             <TemperatureListItem name="Tool-4" temperature={printerState!.Temperature.Tool4} />
           </div>
-        </>
       ) : (
         <div className="display-6 text-center">Could not reach Printer API</div>
       )}
