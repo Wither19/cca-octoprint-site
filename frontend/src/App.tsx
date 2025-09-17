@@ -16,18 +16,21 @@ function App() {
   const [currentPrinter, setPrinter] = useState("a")
   const [printerState, setPrinterState] = useState<PrinterState>()
 
-  const [temp, setTemp] = useState<TemperatureObject | null>(null);
+  const [temp, setTemp] = useState<Omit<TemperatureObject, "History"> | null>(null);
 
   function getPrinterResponse() {
     axios.post("/api/thing").then((r) => setPrinterState(r.data))
   }
 
   function convertTemp() {
-    const newTemp = printerState!.Temperature;
-    delete newTemp.History;
+    if (printerState) {
+      const newTemp = printerState!.Temperature;
+      delete newTemp.History;
 
-    setTemp(newTemp);
-
+      setTemp(newTemp);
+    } else {
+      return;
+    }
   }
 
   useEffect(getPrinterResponse, [currentPrinter])
