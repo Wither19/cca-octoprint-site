@@ -16,6 +16,7 @@ function App() {
   const [currentPrinter, setPrinter] = useState("a")
   const [printerState, setPrinterState] = useState<PrinterState>()
 
+  // This is either null, undefined, or a Temperature object, WITHOUT a History field
   const [temp, setTemp] = useState<Omit<TemperatureObject, "History"> | null>(null);
 
   function getPrinterResponse() {
