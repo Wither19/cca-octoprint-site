@@ -4,6 +4,8 @@ export type TemperatureData = {
   Offset: number;
 };
 
+type NoHistoryTemperature = Omit<keyof PrinterState, TemperatureHistory[]>;
+
 export type ModifiedTemperatureData = {
   Name: string;
   Actual: number;

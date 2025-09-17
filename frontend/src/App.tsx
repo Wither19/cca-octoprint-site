@@ -26,10 +26,11 @@ function App() {
   useEffect(getPrinterResponse, [currentPrinter])
 
   useEffect(() => {
+   
     let tempKeys = Object.keys(printerState!.Temperature)
     let tempValues = Object.values(printerState!.Temperature)
 
-    let tempList: Omit<TemperatureData | TemperatureHistory[], TemperatureHistory[]> = tempValues.filter((t) => !Array.isArray(t));
+    let tempList:  = tempValues.filter((t) => !Array.isArray(t));
   }, [printerState])
 
   return (
