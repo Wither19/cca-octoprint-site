@@ -1,12 +1,10 @@
-.PHONY: go vite build preview
+.PHONY: build preview
 
-go: 
-	go build
 
-vite:
+build:
 	cd frontend && bun run build
-
-build: go vite
+	cd ..
+	go build
 	./cca-octoprint
 
 preview:
