@@ -4,7 +4,15 @@ export type TemperatureData = {
   Offset: number;
 };
 
-type NoHistoryTemperature = Omit<keyof PrinterState, TemperatureHistory[]>;
+export type TemperatureObject = {
+  Bed: TemperatureData;
+  Tool0: TemperatureData;
+  Tool1: TemperatureData;
+  Tool2: TemperatureData;
+  Tool3: TemperatureData;
+  Tool4: TemperatureData;
+  History: TemperatureHistory[];
+};
 
 export type ModifiedTemperatureData = {
   Name: string;
@@ -34,15 +42,7 @@ export type PrinterState = {
   Flags: PrinterStateFlags;
   Text: string;
   Error: string;
-  Temperature: {
-    Bed: TemperatureData;
-    Tool0: TemperatureData;
-    Tool1: TemperatureData;
-    Tool2: TemperatureData;
-    Tool3: TemperatureData;
-    Tool4: TemperatureData;
-    History: TemperatureHistory[];
-  };
+  Temperature: TemperatureObject;
 };
 
 export type ModifiedPrinterResponse = {

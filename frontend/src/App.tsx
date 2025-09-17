@@ -3,7 +3,7 @@ import "./App.scss"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-import type { ModifiedTemperatureData, PrinterState, TemperatureData, TemperatureHistory } from "./types"
+import type { ModifiedTemperatureData, PrinterState, TemperatureData, TemperatureHistory, NoHistoryTemperature, TemperatureObject } from "./types"
 
 import PrinterLink from "./components/PrinterLink"
 import StatusBadge from "./components/StatusBadge"
@@ -26,11 +26,9 @@ function App() {
   useEffect(getPrinterResponse, [currentPrinter])
 
   useEffect(() => {
-   
-    let tempKeys = Object.keys(printerState!.Temperature)
-    let tempValues = Object.values(printerState!.Temperature)
 
-    let tempList:  = tempValues.filter((t) => !Array.isArray(t));
+
+    let tempList: Omit<TemperatureObject, "History"> = printerState!.Temperature.filter((t) => !Array.isArray(t));
   }, [printerState])
 
   return (
