@@ -40,16 +40,18 @@ function App() {
       ) : (
         <APIErrorMSG />
       )}
-      {printerState?.Temperature && (
-        <div id="temperature-container" className="mx-4">
-          <TemperatureListItem name="Bed" temperature={printerState!.Temperature.Bed} />
-          <TemperatureListItem name="Tool-0" temperature={printerState!.Temperature.Tool0} />
-          <TemperatureListItem name="Tool-1" temperature={printerState!.Temperature.Tool1} />
-          <TemperatureListItem name="Tool-2" temperature={printerState!.Temperature.Tool2} />
-          <TemperatureListItem name="Tool-3" temperature={printerState!.Temperature.Tool3} />
-          <TemperatureListItem name="Tool-4" temperature={printerState!.Temperature.Tool4} />
-        </div>
-      )}
+      <div id="temperature-container" className="mx-4">
+        {printerState && (
+          <>
+            <TemperatureListItem name="Bed" temperature={printerState!["temperature"]["bed"]} />
+            <TemperatureListItem name="Tool-0" temperature={printerState!["temperature"]["tool0"]} />
+            <TemperatureListItem name="Tool-1" temperature={printerState!["temperature"]["tool1"]} />
+            <TemperatureListItem name="Tool-2" temperature={printerState!["temperature"]["tool2"]} />
+            <TemperatureListItem name="Tool-3" temperature={printerState!["temperature"]["tool3"]} />
+            <TemperatureListItem name="Tool-4" temperature={printerState!["temperature"]["tool4"]} />
+          </>
+        )}
+      </div>
     </>
   )
 }

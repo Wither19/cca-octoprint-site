@@ -7,7 +7,7 @@ type StatusBadgeProps = { state: PrinterState }
 
 function StatusBadge({ state }: StatusBadgeProps) {
   return (
-     <span className={`badge bg-${printerStateColors(state.Flags)} fs-6 position-relative`}>{state.Text}</span>
+    <span className={`badge bg-${printerStateColors(state["flags"])} fs-6 position-relative`}>{state["text"]}</span>
   )
 }
 
