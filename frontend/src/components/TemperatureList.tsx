@@ -7,8 +7,7 @@ type TemperatureListProps = {
 };
 
 function TemperatureList({ temperatures }: TemperatureListProps) {
-  const existingKeys = Object.keys(temperatures);
-  return existingKeys.map((k) => <TemperatureListItem key={k} name={k} temperature={temperatures[k as keyof typeof temperatures]} />)
+  return Object.keys(temperatures).map((k) => <TemperatureListItem key={k} name={k} temperature={temperatures[k as keyof typeof temperatures]} />)
 }
 
 export default TemperatureList;
