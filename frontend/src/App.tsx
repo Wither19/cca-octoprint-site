@@ -6,9 +6,11 @@ import axios from "axios"
 import type { PrinterState } from "./types"
 
 import PrinterLink from "./components/PrinterLink"
-import StatusBadge from "./components/StatusBadge"
 import TemperatureList from "./components/TemperatureList"
 import APIErrorMSG from "./components/APIErrorMSG"
+
+import { Badge } from "react-bootstrap"
+import { printerStateColors } from "./functions"
 
 function App() {
 
@@ -36,7 +38,7 @@ function App() {
         <>
           <div className="display-6 text-center text-capitalize">
             Printer {currentPrinter}
-            <StatusBadge state={printerState} />
+            <Badge bg={printerStateColors(printerState.flags)}>{printerState.text}</Badge>
           </div>
           <div id="temperature-container" className="mx-4">
             <TemperatureList temperatures={printerState!.temperature} />
