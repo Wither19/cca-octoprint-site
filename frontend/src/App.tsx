@@ -5,11 +5,12 @@ import axios from "axios"
 
 import type { PrinterState } from "./types"
 
+import { Badge } from "react-bootstrap"
+
 import PrinterLink from "./components/PrinterLink"
 import TemperatureList from "./components/TemperatureList"
 import APIErrorMSG from "./components/APIErrorMSG"
 
-import { Badge } from "react-bootstrap"
 import { printerStateColors } from "./functions"
 
 function App() {
