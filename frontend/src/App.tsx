@@ -33,20 +33,18 @@ function App() {
       </div>
 
       {printerState ? (
-        <div className="display-6 text-center text-capitalize">
-          Printer {currentPrinter}
-          <StatusBadge state={printerState} />
-        </div>
+        <>
+          <div className="display-6 text-center text-capitalize">
+            Printer {currentPrinter}
+            <StatusBadge state={printerState} />
+          </div>
+          <div id="temperature-container" className="mx-4">
+            <TemperatureList temperatures={printerState!.temperature} />
+          </div>
+        </>
       ) : (
         <APIErrorMSG />
       )}
-      <div id="temperature-container" className="mx-4">
-        {printerState && (
-          <>
-            <TemperatureList temperatures={printerState!.temperature} />
-          </>
-        )}
-      </div>
     </>
   )
 }
