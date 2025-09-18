@@ -7,7 +7,7 @@ import type { PrinterState } from "./types"
 
 import PrinterLink from "./components/PrinterLink"
 import StatusBadge from "./components/StatusBadge"
-import TemperatureListItem from "./components/TemperatureListItem"
+import TemperatureList from "./components/TemperatureList"
 import APIErrorMSG from "./components/APIErrorMSG"
 
 function App() {
@@ -43,12 +43,7 @@ function App() {
       <div id="temperature-container" className="mx-4">
         {printerState && (
           <>
-            <TemperatureListItem name="Bed" temperature={printerState!["temperature"]["bed"]} />
-            <TemperatureListItem name="Tool-0" temperature={printerState!["temperature"]["tool0"]} />
-            <TemperatureListItem name="Tool-1" temperature={printerState!["temperature"]["tool1"]} />
-            <TemperatureListItem name="Tool-2" temperature={printerState!["temperature"]["tool2"]} />
-            <TemperatureListItem name="Tool-3" temperature={printerState!["temperature"]["tool3"]} />
-            <TemperatureListItem name="Tool-4" temperature={printerState!["temperature"]["tool4"]} />
+            <TemperatureList temperatures={printerState!.temperature} />
           </>
         )}
       </div>
