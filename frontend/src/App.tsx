@@ -37,7 +37,7 @@ function App() {
         <>
           <div className="display-6 text-center text-capitalize">
             Printer {currentPrinter}
-            <Badge className="mx-2" bg={printerStateColors(printerState.state.flags)}>{printerState.state.text}</Badge>
+            <Badge className="mx-3" bg={printerStateColors(printerState.state.flags)}>{printerState.state.text}</Badge>
           </div>
           <div id="temperature-container" className="mx-4">
             <TemperatureList temperatures={printerState!.temperature} />

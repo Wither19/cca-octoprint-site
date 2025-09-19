@@ -1,4 +1,4 @@
-import type { PrinterStatus } from "@jamesgopsill/octoprint-client";
+import type { PrinterStatus } from "@jamesgopsill/octoprint-client"
 
 function TemperatureListItem({ temperature, name }: { temperature: PrinterStatus["temperature"][keyof PrinterStatus["temperature"]], name: string }) {
   return (
