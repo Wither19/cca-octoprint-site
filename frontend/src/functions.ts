@@ -1,14 +1,14 @@
-import type { PrinterStateFlags } from "./types"
+import type { PrinterStatus } from "@jamesgopsill/octoprint-client";
 
-export function printerStateColors(s: PrinterStateFlags) {
+export function printerStateColors(s: PrinterStatus["state"]["flags"]) {
 	let color = "secondary";
 
 	if (s) {
-		if (s["ready"] && s["sdready"]) {
+		if (s["ready"] && s["sdReady"]) {
 			color = "success";
-		} else if (s["paused"] || s["printing"] || s["cancelling"] || s["pausing"]) {
+		} else if (s["paused"] || s["printing"] || s["cancelling"]) {
 			color = "warning";
-		} else if (s["error"] || s["closedorerror"]) {
+		} else if (s["error"] || s["closedOnError"]) {
 			color = "danger";
 		}
 	}

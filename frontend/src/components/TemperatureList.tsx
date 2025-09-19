@@ -1,9 +1,9 @@
-import type { TemperatureObject } from "../types";
+import type { PrinterStatus } from "@jamesgopsill/octoprint-client";
 
 import TemperatureListItem from "./TemperatureListItem";
 
 type TemperatureListProps = {
-  temperatures: Omit<TemperatureObject, "history">;
+  temperatures: Omit<PrinterStatus["temperature"], "history">;
 };
 
 function TemperatureList({ temperatures }: TemperatureListProps) {

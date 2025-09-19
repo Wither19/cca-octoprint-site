@@ -1,11 +1,11 @@
-import type { TemperatureData } from "../types"
+import type { PrinterStatus } from "@jamesgopsill/octoprint-client";
 
-function TemperatureListItem({ temperature, name }: { temperature: TemperatureData, name: string }) {
+function TemperatureListItem({ temperature, name }: { temperature: PrinterStatus["temperature"][keyof PrinterStatus["temperature"]], name: string }) {
   return (
     <div id={name} className="mb-3">
       <h5 className="text-capitalize">{name.replace("-", " ")}</h5>
-      <div>Actual: {temperature["actual"] ?? 0} &deg;C</div>
-      <div>Target: {temperature["target"] ?? 0} &deg;C</div>
+      <div>Actual: {temperature!["actual"] ?? 0} &deg;C</div>
+      <div>Target: {temperature!["target"] ?? 0} &deg;C</div>
     </div>
   )
 }
