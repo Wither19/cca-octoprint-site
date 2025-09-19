@@ -1,6 +1,8 @@
 import type { PrinterStatus } from "@jamesgopsill/octoprint-client";
 
-export function printerStateColors(s: PrinterStatus["state"]["flags"] | undefined) {
+type PrinterStateFlags = PrinterStatus["state"]["flags"]
+
+export function printerStateColors(s: PrinterStateFlags | undefined) {
 	let color = "secondary";
 
 	if (s) {
