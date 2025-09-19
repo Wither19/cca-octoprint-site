@@ -20,9 +20,7 @@ function App() {
   const [currentPrinter, setPrinter] = useState("a")
   const [printerState, setPrinterState] = useState<PrinterStatus>()
 
-  function getPrinterResponse() {
-    axios.post("/api/thing").then((r) => setPrinterState(r.data))
-  }
+  const getPrinterResponse = () => { axios.post("/api/thing").then((r) => setPrinterState(r.data)) }
 
   useEffect(getPrinterResponse, [currentPrinter])
 
