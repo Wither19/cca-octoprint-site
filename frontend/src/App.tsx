@@ -29,16 +29,19 @@ function App() {
   return (
     <>
       <div className="display-6 text-center mx-2">CCA 3D Printing</div>
+
       <div className="mx-3 my-5 d-flex flex-wrap justify-content-around">
         {printerList.map((p) => <PrinterLink key={p} printerID={p} click={() => setPrinter(p)} />)}
       </div>
 
       {printerState ? (
         <>
-          <div className="display-6 text-center text-capitalize">
+          <div id="printer-name-container" className="display-6 text-center text-capitalize">
             Printer {currentPrinter}
+
             <Badge className="mx-3" bg={printerStateColor}>{printerState.state.text}</Badge>
           </div>
+
           <div id="temperature-container" className="mx-4">
             <TemperatureList temperatures={printerState!.temperature} />
           </div>

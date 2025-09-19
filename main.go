@@ -9,8 +9,6 @@ import (
 	"log"
 	"net/http"
 	"strings"
-
-	"github.com/savioxavier/termlink"
 )
 
 // Initializing two embedded filesystems: one for the HTML and the other for styles and scripts.
@@ -39,8 +37,6 @@ func main() {
 	http.HandleFunc("/", mainPage)
 	// http.HandleFunc("/printer/{printerNumber}/", printerStatePage)
 	http.HandleFunc("/api/thing", APITest)
-
-	fmt.Println(termlink.ColorLink("Serving on localhost:8080", "https://localhost:8080", "green"))
 
 	http.ListenAndServe(":8080", nil)
 }

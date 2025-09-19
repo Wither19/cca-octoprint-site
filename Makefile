@@ -1,13 +1,10 @@
 .PHONY: node build preview
 
 node: 
-	cd frontend 
-	npm i
+	cd frontend && npm i
 
 build:
-	cd frontend
-	bun run build
-	cd ..
+	cd frontend && bun run build
 	go build
 	./cca-octoprint
 
