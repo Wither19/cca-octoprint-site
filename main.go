@@ -2,13 +2,15 @@ package main
 
 import (
 	"embed"
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"io/fs"
-	"jv/cca-octoprint/apifunctions"
 	"log"
 	"net/http"
 	"strings"
+
+	"github.com/wmarchesi123/go-3dprint-client/octoprint"
 )
 
 // Initializing two embedded filesystems: one for the HTML and the other for styles and scripts.
@@ -49,7 +51,6 @@ func parseTemp(htmlName string, f template.FuncMap) *template.Template {
 	if f != nil {
 		t = t.Funcs(f)
 	}
-
 	t = template.Must(template.ParseFS(staticWebPages, fmt.Sprintf("frontend/dist/%v", htmlName)))
 
 	return t
@@ -74,8 +75,17 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 
 func APITest(w http.ResponseWriter, r *http.Request) {
 
-	printerResponse := apifunctions.GetPrinterState("", "printer.json")
+	p := octoprint.NewClient("http://jeff-latitude-7490.local/Greene_Printer_A/api/files/local/", "HjR8jWWYZZx2QVwEtBK-AFr8rm8vNXSWthqbiclG4yY")
 
-	w.Write(printerResponse)
+	state, err := p.GetPrinterState()
+	if err != nil {
+		log.Fatalln("printer state: ", err)
+	}
 
+	stateJSON, err := json.Marshal(&state)
+	if err != nil {
+		log.Fatalln("json: ", err)
+	}
+
+	w.Write(stateJSON)
 }
