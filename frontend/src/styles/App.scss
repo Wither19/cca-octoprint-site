@@ -1,9 +1,5 @@
+@use "mixins" as *;
 @import "bootstrap/scss/bootstrap.scss";
-
-@mixin no-select {
-  user-select: none;
-  -moz-user-select: -moz-none;
-}
 
 #printer-name-container {
   @include no-select;

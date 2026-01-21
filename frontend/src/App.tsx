@@ -1,4 +1,4 @@
-import "./App.scss"
+import "./styles/App.scss"
 
 import { useEffect, useState } from "react"
 import axios from "axios"
