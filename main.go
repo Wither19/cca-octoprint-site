@@ -75,7 +75,7 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 
 func APITest(w http.ResponseWriter, r *http.Request, URL string, APIKey string) {
 
-	p := octoprint.NewClient(APIKEy + "api/files/local", APIKey)
+	p := octoprint.NewClient(APIKey + "api/files/local", APIKey)
 
 	state, err := p.GetPrinterState()
 	if err != nil {
