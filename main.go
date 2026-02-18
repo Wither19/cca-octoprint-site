@@ -73,9 +73,9 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 // 	}
 // }
 
-func APITest(w http.ResponseWriter, r *http.Request) {
+func APITest(w http.ResponseWriter, r *http.Request, URL string, APIKey string) {
 
-	p := octoprint.NewClient("http://jeff-latitude-7490.local/Greene_Printer_A/api/files/local", "HjR8jWWYZZx2QVwEtBK-AFr8rm8vNXSWthqbiclG4yY")
+	p := octoprint.NewClient(APIKEy + "api/files/local", APIKey)
 
 	state, err := p.GetPrinterState()
 	if err != nil {
