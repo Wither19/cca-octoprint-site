@@ -12,4 +12,4 @@ This is a custom-made frontend made by a compiled React + TypeScript Vite app, a
 
 `make node` will install all frontend dependencies with NPM as a rule (If you want to use some other package manager you can enter the frontend directory and set it up manually).
 
-`make build` first compiles the frontend, then embeds it all into the Go binary. It will then run the binary and is hosted at [localhost:8080](localhost:8080) by default.
+`make build` first compiles the frontend, then embeds it all into the Go binary. It will then run the binary. Hosted at [localhost:8080](localhost:8080) by default.
