@@ -15,6 +15,8 @@ import (
 
 // Initializing two embedded filesystems: one for the HTML and the other for styles and scripts.
 
+var printerAPIKey string
+
 //go:embed frontend/dist/*
 var staticWebPages embed.FS
 
@@ -35,6 +37,9 @@ func main() {
 	}
 
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.FS(webAppAssets))))
+
+	fmt.Print("Provide OctoPrint API Key: ")
+	fmt.Scanln(&printerAPIKey)
 
 	http.HandleFunc("/", mainPage)
 	// http.HandleFunc("/printer/{printerNumber}/", printerStatePage)
@@ -73,9 +78,9 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 // 	}
 // }
 
-func APITest(w http.ResponseWriter, r *http.Request, URL string, APIKey string) {
+func APITest(w http.ResponseWriter, r *http.Request) {
 
-	p := octoprint.NewClient(APIKey + "api/files/local", APIKey)
+	p := octoprint.NewClient("api/files/local", printerAPIKey)
 
 	state, err := p.GetPrinterState()
 	if err != nil {
